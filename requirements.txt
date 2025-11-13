@@ -8,3 +8,13 @@ ultralytics
 opencv-python
 # Note: ultralytics requires a compatible torch installation. Install torch separately if needed:
 # pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu  # example for CPU
+requests
+supervision
+psycopg2-binary
+passlib[bcrypt]
+python-jose[cryptography]
+twilio
+prometheus-client
+reportlab
+pytest
+yt-dlp

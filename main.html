@@ -887,12 +887,12 @@
           </div>
           <div class="status-item">
             <i class="fas fa-video"></i>
-            <span>4 Cameras Online</span>
+            <span id="hdrCams">0 Cameras Online</span>
           </div>
           <div class="status-item status-warning" style="position: relative">
             <i class="fas fa-exclamation-triangle"></i>
-            <span>3 Violations</span>
-            <div class="notification-badge">3</div>
+            <span>Alerts</span>
+            <div class="notification-badge" id="hdrAlertsBadge">0</div>
           </div>
         </div>
       </div>
@@ -931,93 +931,114 @@
           <div class="card-header">
             <h2 class="card-title">
               <i class="fas fa-video"></i>
-              Live Camera Feeds
+              Live Camera Feeds (YouTube)
             </h2>
-            <div class="control-panel">
-              <button class="btn btn-primary">
-                <i class="fas fa-expand"></i>
-                Full Screen
+            <div class="control-panel" style="align-items: center">
+              <button class="btn btn-primary" onclick="startAllFixed()">
+                <i class="fas fa-play"></i>
+                Start All
               </button>
-              <button class="btn btn-success">
-                <i class="fas fa-record-vinyl"></i>
-                Record
+              <button class="btn btn-danger" onclick="stopAllFixed()">
+                <i class="fas fa-stop"></i>
+                Stop All
               </button>
             </div>
           </div>
           <div class="cameras-grid">
             <div class="camera-feed">
-              <iframe
-                class="camera-video"
-                src="https://www.youtube.com/embed/KIZ_qaxaYG0?autoplay=1&mute=1&loop=1&playlist=KIZ_qaxaYG0&controls=0&modestbranding=1&rel=0"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
-              <div class="camera-overlay"></div>
-              <div class="camera-info">Site Entrance - Camera 01</div>
-              <div class="camera-status"></div>
-              <div class="worker-count">
-                <i class="fas fa-users"></i> 12 Workers
-              </div>
-              <div class="detection-overlay">
-                <span style="color: #ef4444; font-weight: bold"
-                  >HELMET VIOLATION DETECTED</span
-                >
+              <div class="camera-info">Camera 01</div>
+              <div class="camera-status" id="fixed1_status"></div>
+              <img id="fixed1_img" class="camera-video" style="object-fit: contain; background:#000" />
+              <div style="position:absolute; bottom:10px; left:10px; display:flex; gap:0.4rem">
+                <input id="fixedSrc1" placeholder="0 or rtsp:// or C:\\video.mp4" value="https://www.youtube.com/watch?v=KIZ_qaxaYG0" style="padding:0.3rem 0.5rem; border-radius:6px; border:1px solid rgba(255,255,255,0.2); background:rgba(0,0,0,0.4); color:#e2e8f0; width:260px" />
+                <button class="btn btn-primary" onclick="startFixedCam(1)"><i class="fas fa-play"></i> Start</button>
+                <button class="btn btn-danger" onclick="stopFixedCam(1)"><i class="fas fa-stop"></i> Stop</button>
               </div>
             </div>
 
             <div class="camera-feed">
-              <iframe
-                class="camera-video"
-                src="https://www.youtube.com/embed/1I26M3ecCso?autoplay=1&mute=1&loop=1&playlist=1I26M3ecCso&controls=0&modestbranding=1&rel=0"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
-              <div class="camera-overlay"></div>
-              <div class="camera-info">Construction Zone - Camera 02</div>
-              <div class="camera-status"></div>
-              <div class="worker-count">
-                <i class="fas fa-users"></i> 8 Workers
+              <div class="camera-info">Camera 02</div>
+              <div class="camera-status" id="fixed2_status"></div>
+              <img id="fixed2_img" class="camera-video" style="object-fit: contain; background:#000" />
+              <div style="position:absolute; bottom:10px; left:10px; display:flex; gap:0.4rem">
+                <input id="fixedSrc2" placeholder="0 or rtsp:// or C:\\video.mp4" value="https://www.youtube.com/watch?v=1I26M3ecCso" style="padding:0.3rem 0.5rem; border-radius:6px; border:1px solid rgba(255,255,255,0.2); background:rgba(0,0,0,0.4); color:#e2e8f0; width:260px" />
+                <button class="btn btn-primary" onclick="startFixedCam(2)"><i class="fas fa-play"></i> Start</button>
+                <button class="btn btn-danger" onclick="stopFixedCam(2)"><i class="fas fa-stop"></i> Stop</button>
               </div>
             </div>
 
             <div class="camera-feed">
-              <iframe
-                class="camera-video"
-                src="https://www.youtube.com/embed/QXFbAhEiCHw?autoplay=1&mute=1&loop=1&playlist=QXFbAhEiCHw&controls=0&modestbranding=1&rel=0"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
-              <div class="camera-overlay"></div>
-              <div class="camera-info">Restricted Area - Camera 03</div>
-              <div class="camera-status"></div>
-              <div class="worker-count">
-                <i class="fas fa-users"></i> 2 Workers
-              </div>
-              <div class="detection-overlay">
-                <span style="color: #a855f7; font-weight: bold"
-                  >UNAUTHORIZED ZONE ENTRY</span
-                >
+              <div class="camera-info">Camera 03</div>
+              <div class="camera-status" id="fixed3_status"></div>
+              <img id="fixed3_img" class="camera-video" style="object-fit: contain; background:#000" />
+              <div style="position:absolute; bottom:10px; left:10px; display:flex; gap:0.4rem">
+                <input id="fixedSrc3" placeholder="0 or rtsp:// or C:\\video.mp4" value="https://www.youtube.com/watch?v=QXFbAhEiCHw" style="padding:0.3rem 0.5rem; border-radius:6px; border:1px solid rgba(255,255,255,0.2); background:rgba(0,0,0,0.4); color:#e2e8f0; width:260px" />
+                <button class="btn btn-primary" onclick="startFixedCam(3)"><i class="fas fa-play"></i> Start</button>
+                <button class="btn btn-danger" onclick="stopFixedCam(3)"><i class="fas fa-stop"></i> Stop</button>
               </div>
             </div>
 
             <div class="camera-feed">
-              <iframe
-                class="camera-video"
-                src="https://www.youtube.com/embed/rmutdE17nlc?autoplay=1&mute=1&loop=1&playlist=rmutdE17nlc&controls=0&modestbranding=1&rel=0"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
-              <div class="camera-overlay"></div>
-              <div class="camera-info">Equipment Area - Camera 04</div>
-              <div class="camera-status"></div>
-              <div class="worker-count">
-                <i class="fas fa-users"></i> 5 Workers
+              <div class="camera-info">Camera 04</div>
+              <div class="camera-status" id="fixed4_status"></div>
+              <img id="fixed4_img" class="camera-video" style="object-fit: contain; background:#000" />
+              <div style="position:absolute; bottom:10px; left:10px; display:flex; gap:0.4rem">
+                <input id="fixedSrc4" placeholder="0 or rtsp:// or C:\\video.mp4" value="https://www.youtube.com/watch?v=rmutdE17nlc" style="padding:0.3rem 0.5rem; border-radius:6px; border:1px solid rgba(255,255,255,0.2); background:rgba(0,0,0,0.4); color:#e2e8f0; width:260px" />
+                <button class="btn btn-primary" onclick="startFixedCam(4)"><i class="fas fa-play"></i> Start</button>
+                <button class="btn btn-danger" onclick="stopFixedCam(4)"><i class="fas fa-stop"></i> Stop</button>
               </div>
             </div>
+        </div>
+        </div>
+
+        <!-- Live Inference (WebSocket) -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-broadcast-tower"></i>
+              Live Inference
+            </h2>
+            <div class="control-panel" style="align-items: center">
+              <input
+                id="liveSource"
+                type="text"
+                placeholder="0 (webcam) or RTSP/HTTP URL"
+                style="
+                  flex: 1;
+                  padding: 0.6rem 0.8rem;
+                  border-radius: 8px;
+                  border: 1px solid rgba(255, 255, 255, 0.2);
+                  background: rgba(0, 0, 0, 0.2);
+                  color: var(--text-light);
+                "
+              />
+              <button class="btn btn-primary" onclick="startLive()">
+                <i class="fas fa-play"></i>
+                Start
+              </button>
+              <button class="btn btn-danger" onclick="stopLive()">
+                <i class="fas fa-stop"></i>
+                Stop
+              </button>
+            </div>
+          </div>
+          <div>
+            <div style="margin-bottom: 0.5rem; color: var(--text-muted)">
+              Status:
+              <span id="liveStatus" style="color: #ef4444">Offline</span>
+            </div>
+            <img
+              id="liveImg"
+              alt="live"
+              style="
+                width: 100%;
+                max-height: 480px;
+                object-fit: contain;
+                background: #000;
+                border-radius: 8px;
+                display: none;
+              "
+            />
           </div>
         </div>
 
@@ -1042,6 +1063,13 @@
             <div class="chart-container">
               <div class="chart-title">PPE Compliance Rate</div>
               <canvas id="complianceChart"></canvas>
+              <div class="chart-controls">
+                <button class="chart-btn" onclick="refreshAnalytics()">
+                  Refresh Analytics
+                </button>
+                <a class="chart-btn" href="http://127.0.0.1:8000/reports/events.csv" target="_blank">Export CSV</a>
+                <a class="chart-btn" href="http://127.0.0.1:8000/reports/summary.pdf" target="_blank">Download PDF</a>
+              </div>
             </div>
             <div class="chart-container">
               <div class="chart-title">Violations by Type</div>
@@ -1052,6 +1080,127 @@
       </div>
 
       <div class="right-panel">
+        <!-- Dynamic Multi-Camera (WebSocket) -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-video"></i>
+              Live Cameras (Dynamic)
+            </h2>
+            <div class="control-panel" style="align-items: center">
+              <input
+                id="multiSource"
+                type="text"
+                placeholder="0 or rtsp://..."
+                style="
+                  flex: 1;
+                  padding: 0.6rem 0.8rem;
+                  border-radius: 8px;
+                  border: 1px solid rgba(255, 255, 255, 0.2);
+                  background: rgba(0, 0, 0, 0.2);
+                  color: var(--text-light);
+                "
+              />
+              <button class="btn btn-primary" onclick="addCameraTile()">
+                <i class="fas fa-plus"></i>
+                Add Camera
+              </button>
+            </div>
+          </div>
+          <div class="cameras-grid" id="liveCamerasGrid"></div>
+        </div>
+
+        <!-- Sources & Presets -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-list-ul"></i>
+              Sources & Presets
+            </h2>
+          </div>
+          <div class="control-panel" style="flex-direction: column; gap: 0.6rem">
+            <div style="display:flex; gap:0.6rem; width:100%">
+              <input id="presetSrc" placeholder="rtsp:// or https://youtube..." style="flex:1; padding:0.6rem; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:rgba(0,0,0,0.2); color:var(--text-light)" />
+              <button class="btn btn-primary" onclick="saveSourcePreset()"><i class="fas fa-bookmark"></i> Save</button>
+            </div>
+            <div id="presetList" style="display:flex; flex-direction:column; gap:0.4rem"></div>
+          </div>
+        </div>
+
+        <!-- Live Data Settings -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-sliders-h"></i>
+              Live Data Settings
+            </h2>
+          </div>
+          <div class="control-panel" style="gap:1rem; align-items:center">
+            <label style="display:flex; gap:0.5rem; align-items:center">
+              <input id="autoSyncToggle" type="checkbox" checked /> Auto-sync violations
+            </label>
+            <label style="display:flex; gap:0.5rem; align-items:center">
+              <input id="autoAnalyticsToggle" type="checkbox" checked /> Auto-refresh analytics
+            </label>
+            <button class="btn btn-success" onclick="syncFromBackend(true)"><i class="fas fa-sync"></i> Sync now</button>
+            <button class="btn btn-success" onclick="refreshAnalytics(true)"><i class="fas fa-chart-bar"></i> Refresh now</button>
+          </div>
+        </div>
+
+        <!-- Auth -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-user-shield"></i>
+              Authentication
+            </h2>
+          </div>
+          <div class="control-panel" style="flex-direction: column; gap: 0.5rem">
+            <input id="authUser" placeholder="username" style="padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.2); color: var(--text-light);" />
+            <input id="authPass" type="password" placeholder="password" style="padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.2); color: var(--text-light);" />
+            <div style="display:flex; gap:0.5rem">
+              <button class="btn btn-primary" onclick="login()"><i class="fas fa-sign-in-alt"></i> Login</button>
+              <button class="btn btn-danger" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+            <div id="authStatus" style="color: var(--text-muted)">Not logged in</div>
+          </div>
+        </div>
+
+        <!-- Zones & Rules Config -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-draw-polygon"></i>
+              Zones & Rules
+            </h2>
+          </div>
+          <div class="control-panel" style="flex-direction: column; gap: 0.6rem">
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; width:100%">
+              <input id="zoneSource" placeholder="source (e.g., 0)" style="padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.2); color: var(--text-light);" />
+              <input id="zoneName" placeholder="zone name" style="padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.2); color: var(--text-light);" />
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; width:100%">
+              <select id="zoneType" style="padding:0.6rem; border-radius:8px; background: rgba(0,0,0,0.2); color:var(--text-light); border: 1px solid rgba(255,255,255,0.2)">
+                <option value="no_go">no_go</option>
+                <option value="info">info</option>
+              </select>
+              <input id="dwellSeconds" placeholder="dwell seconds (optional)" style="padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.2); color: var(--text-light);" />
+            </div>
+            <textarea id="zonePolygon" rows="3" placeholder='polygon JSON (e.g., [[0.1,0.1],[0.4,0.1],[0.4,0.4],[0.1,0.4]])' style="width:100%; padding:0.6rem; border-radius:8px; background: rgba(0,0,0,0.2); color: var(--text-light); border: 1px solid rgba(255,255,255,0.2)"></textarea>
+            <div style="display:flex; gap:0.6rem">
+              <button class="btn btn-primary" onclick="createZone()"><i class="fas fa-plus-circle"></i> Create Zone</button>
+              <button class="btn btn-success" onclick="loadZones()"><i class="fas fa-sync"></i> Load Zones</button>
+              <button class="btn btn-warning" onclick="updateRules()"><i class="fas fa-tools"></i> Update Rules</button>
+            </div>
+            <div style="display:flex; gap:0.6rem">
+              <label style="display:flex; align-items:center; gap:0.4rem"><input id="ruleHelmet" type="checkbox" /> require_helmet</label>
+              <label style="display:flex; align-items:center; gap:0.4rem"><input id="ruleVest" type="checkbox" /> require_vest</label>
+              <label style="display:flex; align-items:center; gap:0.4rem"><input id="privacyBlur" type="checkbox" /> face_blur</label>
+            </div>
+            <div id="zonesList" style="max-height:160px; overflow:auto; width:100%; background: rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:0.6rem"></div>
+          </div>
+        </div>
+
         <!-- Quick inference upload (local testing) -->
         <div class="card">
           <div class="card-header">
@@ -1131,50 +1280,20 @@
             <h2 class="card-title">
               <i class="fas fa-exclamation-triangle"></i>
               Active Violations
-              <span class="notification-badge">3</span>
+              <span class="notification-badge" id="violationBadge">3</span>
             </h2>
-            <button class="btn btn-danger" onclick="clearAlerts()">
-              <i class="fas fa-broom"></i>
-              Clear All
-            </button>
-          </div>
-          <div class="violation-alerts scrollbar-custom" id="violationList">
-            <div class="alert-item">
-              <div class="alert-icon">
-                <i class="fas fa-hard-hat"></i>
-              </div>
-              <div class="alert-content">
-                <div class="alert-title">Helmet Missing</div>
-                <div class="alert-details">Worker ID: WK-2847 • Camera 01</div>
-                <div class="alert-time">2 minutes ago</div>
-              </div>
-              <span class="violation-badge badge-helmet">Helmet</span>
-            </div>
-
-            <div class="alert-item">
-              <div class="alert-icon">
-                <i class="fas fa-shield-alt"></i>
-              </div>
-              <div class="alert-content">
-                <div class="alert-title">Safety Vest Missing</div>
-                <div class="alert-details">Worker ID: WK-1923 • Camera 02</div>
-                <div class="alert-time">5 minutes ago</div>
-              </div>
-              <span class="violation-badge badge-vest">Vest</span>
-            </div>
-
-            <div class="alert-item">
-              <div class="alert-icon">
-                <i class="fas fa-ban"></i>
-              </div>
-              <div class="alert-content">
-                <div class="alert-title">Unauthorized Zone Entry</div>
-                <div class="alert-details">Worker ID: WK-3456 • Camera 03</div>
-                <div class="alert-time">7 minutes ago</div>
-              </div>
-              <span class="violation-badge badge-zone">Zone</span>
+            <div class="control-panel">
+              <button class="btn btn-success" onclick="syncFromBackend()">
+                <i class="fas fa-cloud-download-alt"></i>
+                Sync from Backend
+              </button>
+              <button class="btn btn-danger" onclick="clearAlerts()">
+                <i class="fas fa-broom"></i>
+                Clear All
+              </button>
             </div>
           </div>
+          <div class="violation-alerts scrollbar-custom" id="violationList"></div>
         </div>
 
         <!-- System Controls -->
@@ -1196,10 +1315,6 @@
             <button class="btn btn-success" onclick="exportReport()">
               <i class="fas fa-download"></i>
               Export Safety Report
-            </button>
-            <button class="btn btn-danger" onclick="triggerEmergency()">
-              <i class="fas fa-exclamation-triangle"></i>
-              Emergency Alert
             </button>
           </div>
         </div>
@@ -1493,9 +1608,31 @@
 
         // Initialize charts
         initCharts();
+        // Initial real data load and presets
+        syncFromBackend();
+        refreshAnalytics();
+        loadSourcePresets();
+        // Setup toggles
+        const t1 = document.getElementById("autoSyncToggle");
+        const t2 = document.getElementById("autoAnalyticsToggle");
+        if (t1) { t1.checked = autoSync; t1.addEventListener("change", () => autoSync = t1.checked); }
+        if (t2) { t2.checked = autoAnalytics; t2.addEventListener("change", () => autoAnalytics = t2.checked); }
 
-        // Simulate initial data load
-        updateStats();
+        // Prefill fixed tiles with first 4 YouTube presets (if empty) and auto-start
+        try {
+          const raw = localStorage.getItem("savedSources") || "[]";
+          let arr = [];
+          try { arr = JSON.parse(raw); } catch(e) { arr = []; }
+          const slots = [1,2,3,4];
+          slots.forEach((slot, idx) => {
+            const input = document.getElementById(`fixedSrc${slot}`);
+            if (input && !input.value && arr[idx]) {
+              input.value = arr[idx];
+            }
+          });
+          startAllFixed();
+        } catch (e) { console.error(e); }
+        updateHeaderCameras();
 
         // Show welcome toast
         showToast(
@@ -1504,10 +1641,9 @@
         );
       });
 
-      // Simulate real-time data updates
-      setInterval(updateStats, 5000);
-      setInterval(addRandomViolation, 15000);
-      setInterval(updateCharts, 8000); // Update charts every 8 seconds
+      // Real-time polling for backend data
+      setInterval(() => { syncFromBackend(); updateHeaderCameras(); }, 5000);
+      setInterval(() => { refreshAnalytics(); }, 10000);
 
       function updateStats() {
         // Simulate worker count updates
@@ -1628,7 +1764,8 @@
         const violationList = document.getElementById("violationList");
         violationList.innerHTML = "";
         violationCount = 0;
-        updateViolationBadges();
+        const badge = document.getElementById("violationBadge");
+        if (badge) badge.textContent = "0";
         showToast("All alerts cleared", "success");
       }
 
@@ -1697,14 +1834,13 @@
 
       // Toast notification function
       function showToast(message, type = "info") {
+        if (type !== "error") return;
         const toastContainer = document.getElementById("toastContainer");
         const toast = document.createElement("div");
         toast.className = `toast ${type}`;
 
         let icon = "fas fa-info-circle";
         if (type === "error") icon = "fas fa-exclamation-circle";
-        if (type === "success") icon = "fas fa-check-circle";
-        if (type === "warning") icon = "fas fa-exclamation-triangle";
 
         toast.innerHTML = `
           <i class="${icon}"></i>
@@ -1719,12 +1855,7 @@
         }, 3000);
       }
 
-      // Simulate camera status updates
-      setInterval(() => {
-        document.querySelectorAll(".camera-status").forEach((status) => {
-          status.style.background = Math.random() > 0.1 ? "#22c55e" : "#ef4444";
-        });
-      }, 10000);
+      // Camera status will reflect actual WebSocket open/close events
 
       // Add CSS animation for emergency flash
       const style = document.createElement("style");
@@ -1764,24 +1895,7 @@
         });
       });
 
-      // Simulate real-time performance metrics
-      setInterval(() => {
-        const gpuUtil = Math.floor(Math.random() * 30) + 60;
-        const accuracy = (0.8 + Math.random() * 0.15).toFixed(2);
-
-        // Update performance metrics in the Model Performance card
-        const performanceCard =
-          document.querySelectorAll(".card")[
-            document.querySelectorAll(".card").length - 2
-          ];
-        if (performanceCard) {
-          const spans = performanceCard.querySelectorAll("span");
-          if (spans.length >= 4) {
-            spans[0].textContent = accuracy;
-            spans[3].textContent = `${gpuUtil}%`;
-          }
-        }
-      }, 8000);
+      // Performance metrics: no randomization; populate via analytics if desired
 
       // Chart control buttons
       document.querySelectorAll(".chart-btn").forEach((button) => {
@@ -1803,7 +1917,16 @@
       // -----------------------
       // Simple client -> backend helper
       // -----------------------
-      const API_URL = "http://127.0.0.1:8000/predict"; // backend endpoint (change if needed)
+      // Resolve API/WS endpoints dynamically to avoid hostname/HTTP(S) mismatches
+      const API_HOST = `${location.protocol}//${location.hostname}:8000`;
+      const API_URL = `${API_HOST}/predict`;
+      const WS_URL = `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.hostname}:8000/ws`; // websocket live inference
+      let wsLive = null;
+      const liveCameras = new Map(); // id -> { ws, imgEl, statusEl }
+      let authToken = localStorage.getItem("token") || "";
+      const fixedCams = new Map(); // slot -> { ws, imgEl, statusEl }
+      let autoSync = true;
+      let autoAnalytics = true;
 
       function handleFileInput(e) {
         const file = e.target.files[0];
@@ -1859,6 +1982,469 @@
           return;
         }
         predictFromFile(input.files[0]);
+      }
+
+      // Live inference via WebSocket
+      function startLive() {
+        try {
+          if (wsLive && wsLive.readyState === WebSocket.OPEN) return;
+
+          const srcInput = document.getElementById("liveSource");
+          const source = (srcInput && srcInput.value.trim()) || "0";
+
+          wsLive = new WebSocket(WS_URL);
+
+          wsLive.onopen = function () {
+            wsLive.send(JSON.stringify({ source }));
+            const st = document.getElementById("liveStatus");
+            if (st) {
+              st.textContent = "Online";
+              st.style.color = "#22c55e";
+            }
+            updateHeaderCameras();
+          };
+
+          wsLive.onmessage = function (ev) {
+            const img = document.getElementById("liveImg");
+            if (img) {
+              img.src = "data:image/jpeg;base64," + ev.data;
+              img.style.display = "block";
+            }
+          };
+
+          wsLive.onclose = function () {
+            const st = document.getElementById("liveStatus");
+            if (st) {
+              st.textContent = "Offline";
+              st.style.color = "#ef4444";
+            }
+            updateHeaderCameras();
+          };
+
+          wsLive.onerror = function () {
+            showToast("Live stream error", "error");
+          };
+        } catch (e) {
+          console.error(e);
+          showToast("Could not start live stream", "error");
+        }
+      }
+
+      function stopLive() {
+        try {
+          if (wsLive) {
+            wsLive.close();
+            wsLive = null;
+            const st = document.getElementById("liveStatus");
+            if (st) {
+              st.textContent = "Offline";
+              st.style.color = "#ef4444";
+            }
+            updateHeaderCameras();
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      // Dynamic multi-camera tiles
+      function addCameraTile() {
+        const srcInput = document.getElementById("multiSource");
+        const source = (srcInput && srcInput.value.trim()) || "0";
+        const id = `cam_${Date.now()}`;
+
+        const grid = document.getElementById("liveCamerasGrid");
+        const wrap = document.createElement("div");
+        wrap.className = "camera-feed";
+        wrap.style.position = "relative";
+        wrap.innerHTML = `
+          <div class="camera-overlay"></div>
+          <div class="camera-info">${source}</div>
+          <div class="camera-status"></div>
+          <img id="${id}_img" class="camera-video" style="object-fit: contain; background:#000" />
+          <div style="position:absolute; bottom:10px; right:10px; display:flex; gap:0.4rem">
+            <button id="${id}_fs" class="btn btn-primary"><i class="fas fa-expand"></i> Fullscreen</button>
+            <button id="${id}_btn" class="btn btn-danger"><i class="fas fa-times"></i> Close</button>
+          </div>
+        `;
+        grid.prepend(wrap);
+
+        const imgEl = wrap.querySelector(`#${id}_img`);
+        const btnEl = wrap.querySelector(`#${id}_btn`);
+        const fsEl = wrap.querySelector(`#${id}_fs`);
+        const statusEl = wrap.querySelector(".camera-status");
+
+        const ws = new WebSocket(WS_URL);
+        ws.onopen = function () {
+          ws.send(JSON.stringify({ source }));
+          statusEl.style.background = "#22c55e";
+          updateHeaderCameras();
+        };
+        ws.onmessage = function (ev) {
+          imgEl.src = "data:image/jpeg;base64," + ev.data;
+        };
+        ws.onclose = function () {
+          statusEl.style.background = "#ef4444";
+          updateHeaderCameras();
+        };
+        ws.onerror = function () {
+          showToast(`Error on ${source}`, "error");
+          statusEl.style.background = "#ef4444";
+        };
+
+        btnEl.onclick = function () {
+          try {
+            ws.close();
+          } catch (e) {}
+          wrap.remove();
+          liveCameras.delete(id);
+          updateHeaderCameras();
+        };
+        fsEl.onclick = function () {
+          if (wrap.classList.contains("fullscreen")) {
+            wrap.classList.remove("fullscreen");
+            wrap.style.zIndex = "";
+            wrap.style.position = "relative";
+          } else {
+            wrap.classList.add("fullscreen");
+            wrap.style.position = "fixed";
+            wrap.style.zIndex = "2000";
+            wrap.style.top = "0";
+            wrap.style.left = "0";
+            wrap.style.width = "100vw";
+            wrap.style.height = "100vh";
+          }
+        };
+
+        liveCameras.set(id, { ws, imgEl, statusEl });
+        updateHeaderCameras();
+      }
+
+      // Backend-driven events
+      async function syncFromBackend(force = false) {
+        if (!force && !autoSync) return;
+        try {
+          const res = await fetch("http://127.0.0.1:8000/events?limit=20");
+          if (!res.ok) throw new Error("Failed to fetch events");
+          const data = await res.json();
+          const list = document.getElementById("violationList");
+          list.innerHTML = "";
+          const events = data.events || [];
+          document.getElementById("violationBadge").textContent = events.length;
+          const hdrAlerts = document.getElementById("hdrAlertsBadge");
+          if (hdrAlerts) hdrAlerts.textContent = events.length;
+
+          events.forEach((ev) => {
+            const item = document.createElement("div");
+            item.className = "alert-item";
+            const type = ev.type || "event";
+            const track = ev.track_id != null ? `#${ev.track_id}` : "";
+            item.innerHTML = `
+              <div class="alert-icon"><i class="fas fa-bell"></i></div>
+              <div class="alert-content">
+                <div class="alert-title">${type.toUpperCase()} ${track}</div>
+                <div class="alert-details">Source: ${ev.source} • Class: ${ev.class_id} • Conf: ${(ev.conf||0).toFixed(2)}</div>
+                <div class="alert-time">${new Date(ev.ts * 1000).toLocaleTimeString()}</div>
+              </div>
+              <span class="violation-badge" style="background: rgba(59,130,246,0.2); color:#93c5fd; border:1px solid #3b82f6;">Evt</span>
+            `;
+            list.appendChild(item);
+          });
+          showToast("Synced events from backend", "success");
+        } catch (e) {
+          console.error(e);
+          showToast("Failed to sync backend events", "error");
+        }
+      }
+
+      // Fixed camera helpers
+      function startFixedCam(slot) {
+        try {
+          const src = document.getElementById(`fixedSrc${slot}`);
+          const imgEl = document.getElementById(`fixed${slot}_img`);
+          const statusEl = document.getElementById(`fixed${slot}_status`);
+          if (!src || !imgEl || !statusEl) return;
+          const source = (src.value || "0").trim();
+          // Close existing
+          const existing = fixedCams.get(slot);
+          if (existing && existing.ws) {
+            try { existing.ws.close(); } catch (e) {}
+          }
+          const ws = new WebSocket(WS_URL);
+          ws.onopen = function () {
+            ws.send(JSON.stringify({ source }));
+            statusEl.style.background = "#22c55e";
+            updateHeaderCameras();
+          };
+          ws.onmessage = function (ev) {
+            imgEl.src = "data:image/jpeg;base64," + ev.data;
+          };
+          ws.onclose = function () {
+            statusEl.style.background = "#ef4444";
+            updateHeaderCameras();
+          };
+          ws.onerror = function () {
+            statusEl.style.background = "#ef4444";
+            showToast(`Error on ${source}`, "error");
+          };
+          fixedCams.set(slot, { ws, imgEl, statusEl });
+          updateHeaderCameras();
+        } catch (e) {
+          console.error(e);
+          showToast("Failed to start camera", "error");
+        }
+      }
+
+      function stopFixedCam(slot) {
+        const entry = fixedCams.get(slot);
+        if (entry && entry.ws) {
+          try { entry.ws.close(); } catch (e) {}
+          entry.statusEl.style.background = "#ef4444";
+          fixedCams.delete(slot);
+          updateHeaderCameras();
+        }
+      }
+
+      function startAllFixed() {
+        [1,2,3,4].forEach(startFixedCam);
+      }
+      function stopAllFixed() {
+        [1,2,3,4].forEach(stopFixedCam);
+      }
+
+      // Presets
+      function loadSourcePresets() {
+        const raw = localStorage.getItem("savedSources") || "[]";
+        let arr = [];
+        try { arr = JSON.parse(raw); } catch(e) { arr = []; }
+        const list = document.getElementById("presetList");
+        if (!list) return;
+        list.innerHTML = "";
+        if (!arr.length) {
+          const p = document.createElement("div");
+          p.style.color = "var(--text-muted)";
+          p.textContent = "No saved sources yet.";
+          list.appendChild(p);
+          return;
+        }
+        arr.forEach((src, idx) => {
+          const row = document.createElement("div");
+          row.style.display = "flex";
+          row.style.justifyContent = "space-between";
+          row.style.alignItems = "center";
+          row.style.gap = "0.5rem";
+          row.innerHTML = `<div style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:60%">${src}</div>`;
+          const controls = document.createElement("div");
+          controls.style.display = "flex";
+          controls.style.gap = "0.4rem";
+          const btnTile = document.createElement("button");
+          btnTile.className = "btn btn-primary";
+          btnTile.innerHTML = '<i class="fas fa-plus-square"></i>';
+          btnTile.title = "Start in new tile";
+          btnTile.onclick = () => addCameraTileFromSource(src);
+          const btnCam1 = document.createElement("button");
+          btnCam1.className = "btn btn-success";
+          btnCam1.innerHTML = '<i class="fas fa-video"></i> Cam01';
+          btnCam1.onclick = () => { document.getElementById("fixedSrc1").value = src; startFixedCam(1); };
+          const btnDel = document.createElement("button");
+          btnDel.className = "btn btn-danger";
+          btnDel.innerHTML = '<i class="fas fa-trash"></i>';
+          btnDel.onclick = () => deleteSourcePreset(idx);
+          controls.appendChild(btnTile);
+          controls.appendChild(btnCam1);
+          controls.appendChild(btnDel);
+          row.appendChild(controls);
+          list.appendChild(row);
+        });
+      }
+
+      function saveSourcePreset() {
+        const input = document.getElementById("presetSrc");
+        const val = (input.value || "").trim();
+        if (!val) return;
+        const raw = localStorage.getItem("savedSources") || "[]";
+        let arr = [];
+        try { arr = JSON.parse(raw); } catch(e) { arr = []; }
+        if (!arr.includes(val)) {
+          arr.push(val);
+          localStorage.setItem("savedSources", JSON.stringify(arr));
+          showToast("Source saved", "success");
+          loadSourcePresets();
+        }
+        input.value = "";
+      }
+
+      function deleteSourcePreset(idx) {
+        const raw = localStorage.getItem("savedSources") || "[]";
+        let arr = [];
+        try { arr = JSON.parse(raw); } catch(e) { arr = []; }
+        arr.splice(idx, 1);
+        localStorage.setItem("savedSources", JSON.stringify(arr));
+        loadSourcePresets();
+        showToast("Preset removed", "warning");
+      }
+
+      function addCameraTileFromSource(source) {
+        const srcInput = document.getElementById("multiSource");
+        if (srcInput) srcInput.value = source;
+        addCameraTile();
+      }
+
+      // Header updates
+      function updateHeaderCameras() {
+        const total = (wsLive && wsLive.readyState === WebSocket.OPEN ? 1 : 0) + liveCameras.size + fixedCams.size;
+        const hdr = document.getElementById("hdrCams");
+        if (hdr) hdr.textContent = `${total} Camera${total === 1 ? "" : "s"} Online`;
+      }
+
+      // Auth
+      async function login() {
+        const u = document.getElementById("authUser").value.trim();
+        const p = document.getElementById("authPass").value.trim();
+        try {
+          const res = await fetch("http://127.0.0.1:8000/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username: u, password: p }),
+          });
+          if (!res.ok) {
+            showToast("Login failed", "error");
+            return;
+          }
+          const data = await res.json();
+          authToken = data.access_token;
+          localStorage.setItem("token", authToken);
+          document.getElementById("authStatus").textContent = `Logged in as ${u} (${data.role})`;
+          showToast("Logged in", "success");
+        } catch (e) {
+          showToast("Login error", "error");
+        }
+      }
+
+      function logout() {
+        authToken = "";
+        localStorage.removeItem("token");
+        document.getElementById("authStatus").textContent = "Not logged in";
+        showToast("Logged out", "warning");
+      }
+
+      async function refreshAnalytics(force = false) {
+        if (!force && !autoAnalytics) return;
+        try {
+          const res = await fetch("http://127.0.0.1:8000/analytics/summary?days=7");
+          if (!res.ok) throw new Error("fetch failed");
+          const data = await res.json();
+          // Update violation chart by types
+          const byType = data.by_type || {};
+          const labels = Object.keys(byType);
+          const values = labels.map((k) => byType[k]);
+          violationChart.data.labels = labels.length ? labels : ["detection", "zone_violation"];
+          violationChart.data.datasets[0].data = values.length ? values : [0, 0];
+          violationChart.update();
+          showToast("Analytics refreshed", "success");
+        } catch (e) {
+          console.error(e);
+          showToast("Analytics refresh failed", "error");
+        }
+      }
+
+      async function createZone() {
+        try {
+          const source = document.getElementById("zoneSource").value.trim();
+          const name = document.getElementById("zoneName").value.trim();
+          const type = document.getElementById("zoneType").value;
+          const polygon = JSON.parse(document.getElementById("zonePolygon").value || "[]");
+          if (!authToken) {
+            showToast("Login required", "warning");
+            return;
+          }
+          const res = await fetch("http://127.0.0.1:8000/zones", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + authToken,
+            },
+            body: JSON.stringify({ source, name, type, polygon }),
+          });
+          if (!res.ok) throw new Error("create failed");
+          showToast("Zone created", "success");
+          loadZones();
+        } catch (e) {
+          console.error(e);
+          showToast("Create zone failed", "error");
+        }
+      }
+
+      async function loadZones() {
+        try {
+          const res = await fetch("http://127.0.0.1:8000/zones");
+          const data = await res.json();
+          const list = document.getElementById("zonesList");
+          list.innerHTML = "";
+          (data.zones || []).forEach((z) => {
+            const row = document.createElement("div");
+            row.style.display = "flex";
+            row.style.justifyContent = "space-between";
+            row.style.alignItems = "center";
+            row.style.padding = "0.3rem 0";
+            row.innerHTML = `<div>#${z.id} [${z.source}] ${z.name} (${z.type})</div>`;
+            const btn = document.createElement("button");
+            btn.className = "btn btn-danger";
+            btn.innerHTML = '<i class="fas fa-trash"></i>';
+            btn.onclick = async () => {
+              if (!authToken) {
+                showToast("Login required", "warning");
+                return;
+              }
+              const r = await fetch("http://127.0.0.1:8000/zones/" + z.id, {
+                method: "DELETE",
+                headers: { Authorization: "Bearer " + authToken },
+              });
+              if (r.ok) {
+                showToast("Zone deleted", "success");
+                loadZones();
+              } else {
+                showToast("Delete failed", "error");
+              }
+            };
+            row.appendChild(btn);
+            list.appendChild(row);
+          });
+          showToast("Zones loaded", "success");
+        } catch (e) {
+          console.error(e);
+          showToast("Load zones failed", "error");
+        }
+      }
+
+      async function updateRules() {
+        try {
+          if (!authToken) {
+            showToast("Login required", "warning");
+            return;
+          }
+          const require_helmet = document.getElementById("ruleHelmet").checked;
+          const require_vest = document.getElementById("ruleVest").checked;
+          const face_blur = document.getElementById("privacyBlur").checked;
+          const dwell_seconds = parseInt(document.getElementById("dwellSeconds").value || "0");
+          const body = {
+            rules: { require_helmet, require_vest, dwell_seconds },
+            privacy: { face_blur }
+          };
+          const res = await fetch("http://127.0.0.1:8000/config", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + authToken,
+            },
+            body: JSON.stringify(body),
+          });
+          if (!res.ok) throw new Error("failed");
+          showToast("Rules updated", "success");
+        } catch (e) {
+          console.error(e);
+          showToast("Rules update failed", "error");
+        }
       }
     </script>
   </body>

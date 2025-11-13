@@ -1,0 +1,5 @@
+﻿path: C:/Users/Kiruthik Kumar M/construction-site-safty/PPE.v1i.yolov8
+train: C:/Users/Kiruthik Kumar M/construction-site-safty/PPE.v1i.yolov8/train/images
+val:   C:/Users/Kiruthik Kumar M/construction-site-safty/PPE.v1i.yolov8/train/images
+test:  C:/Users/Kiruthik Kumar M/construction-site-safty/PPE.v1i.yolov8/train/images
+names: ['boots','gloves','hardhat','no_boots','no_gloves','no_hardhat','no_vest','person','vest']

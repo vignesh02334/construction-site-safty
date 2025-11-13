@@ -1,0 +1,39 @@
+# Python / venv
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs and temp
+*.log
+backend.log
+
+# Model weights / artifacts (use Git LFS if you need to version these)
+*.pt
+*.onnx
+*.engine
+runs/
+
+# Datasets and media
+datasets/
+*.mp4
+*.avi
+*.mkv
+*.webm
+*.mov
+
+# Local DB
+events.db
+
+# Ignore Roboflow image folders; keep data.yaml
+PPE.v1i.yolov8/train/images/
+PPE.v1i.yolov8/train/labels/
+PPE.v1i.yolov8/valid/
+PPE.v1i.yolov8/test/
+
